@@ -1,0 +1,548 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   GreenTech Design System — Tailwind CSS v4
+   Primary: Emerald | Accent: Teal | Dark: Forest Green
+   ========================================================================== */
+
+@theme {
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — Emerald */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+  --color-brand-950: #022c22;
+
+  /* Accent — Teal */
+  --color-accent-50: #f0fdfa;
+  --color-accent-100: #ccfbf1;
+  --color-accent-200: #99f6e4;
+  --color-accent-300: #5eead4;
+  --color-accent-400: #2dd4bf;
+  --color-accent-500: #14b8a6;
+  --color-accent-600: #0d9488;
+  --color-accent-700: #0f766e;
+  --color-accent-800: #115e59;
+  --color-accent-900: #134e4a;
+
+  /* Forest — Dark green (hero, footer, overlays) */
+  --color-forest-700: #15803d;
+  --color-forest-800: #166534;
+  --color-forest-900: #14532d;
+  --color-forest-950: #052e16;
+
+  /* Surfaces & neutrals */
+  --color-surface-50: #f8faf9;
+  --color-surface-100: #f1f5f3;
+  --color-surface-200: #e2e8e5;
+  --color-surface-muted: #64748b;
+  --color-surface-dark: #1e293b;
+
+  /* Semantic aliases */
+  --color-primary: var(--color-brand-600);
+  --color-primary-hover: var(--color-brand-700);
+  --color-primary-light: var(--color-brand-50);
+
+  /* Radius */
+  --radius-card: 1rem;
+  --radius-button: 0.75rem;
+  --radius-badge: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 20px 25px -5px rgb(5 150 105 / 0.08), 0 8px 10px -6px rgb(5 150 105 / 0.06);
+  --shadow-button: 0 1px 2px 0 rgb(5 150 105 / 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-surface-dark antialiased;
+    background-color: var(--color-surface-50);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold tracking-tight text-gray-900;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Layout utilities
+   -------------------------------------------------------------------------- */
+
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 640px) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (width >= 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section-padding {
+  padding-block: 4rem;
+
+  @media (width >= 768px) {
+    padding-block: 6rem;
+  }
+}
+
+@utility section-padding-sm {
+  padding-block: 3rem;
+
+  @media (width >= 768px) {
+    padding-block: 4rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Typography utilities
+   -------------------------------------------------------------------------- */
+
+@utility heading-1 {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--color-gray-900, #111827);
+
+  @media (width >= 640px) {
+    font-size: 2.25rem;
+  }
+
+  @media (width >= 1024px) {
+    font-size: 3rem;
+  }
+}
+
+@utility heading-2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-gray-900, #111827);
+
+  @media (width >= 640px) {
+    font-size: 1.875rem;
+  }
+
+  @media (width >= 1024px) {
+    font-size: 2.25rem;
+  }
+}
+
+@utility heading-3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--color-gray-900, #111827);
+
+  @media (width >= 640px) {
+    font-size: 1.5rem;
+  }
+}
+
+@utility heading-section {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--color-gray-900, #111827);
+  text-align: center;
+
+  @media (width >= 640px) {
+    font-size: 2.25rem;
+  }
+}
+
+@utility text-lead {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-surface-muted);
+
+  @media (width >= 640px) {
+    font-size: 1.25rem;
+  }
+}
+
+@utility text-gradient-brand {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-brand-600) 0%,
+    var(--color-accent-600) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-600);
+}
+
+/* --------------------------------------------------------------------------
+   Button utilities
+   -------------------------------------------------------------------------- */
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-button);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-button);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--color-brand-600);
+  color: white;
+  box-shadow: var(--shadow-button);
+
+  &:hover {
+    background-color: var(--color-brand-700);
+    box-shadow: 0 4px 6px -1px rgb(5 150 105 / 0.25);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-button);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  color: var(--color-brand-700);
+  border: 1px solid var(--color-brand-200);
+  box-shadow: var(--shadow-card);
+
+  &:hover {
+    background-color: var(--color-brand-50);
+    border-color: var(--color-brand-300);
+  }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-button);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgb(255 255 255 / 0.8);
+
+  &:hover {
+    background-color: rgb(255 255 255 / 0.1);
+    border-color: white;
+  }
+}
+
+@utility btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-button);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--color-accent-600);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-accent-700);
+  }
+}
+
+@utility btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
+
+@utility btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Card utilities
+   -------------------------------------------------------------------------- */
+
+@utility card {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-surface-200);
+  background-color: white;
+  box-shadow: var(--shadow-card);
+}
+
+@utility card-body {
+  padding: 1.25rem;
+
+  @media (width >= 640px) {
+    padding: 1.5rem;
+  }
+}
+
+@utility card-hover {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-surface-200);
+  background-color: white;
+  box-shadow: var(--shadow-card);
+  transition-property: box-shadow, transform, border-color;
+  transition-duration: 300ms;
+
+  &:hover {
+    border-color: var(--color-brand-200);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+}
+
+@utility card-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Badge & chip utilities
+   -------------------------------------------------------------------------- */
+
+@utility badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-badge);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+@utility badge-brand {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-badge);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-800);
+}
+
+@utility badge-accent {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-badge);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  background-color: var(--color-accent-100);
+  color: var(--color-accent-800);
+}
+
+/* --------------------------------------------------------------------------
+   Section & decorative utilities
+   -------------------------------------------------------------------------- */
+
+@utility section-bg-white {
+  background-color: white;
+}
+
+@utility section-bg-light {
+  background-color: var(--color-surface-50);
+}
+
+@utility section-bg-brand {
+  background-color: var(--color-brand-50);
+}
+
+@utility section-bg-forest {
+  background: linear-gradient(
+    180deg,
+    var(--color-brand-950) 0%,
+    var(--color-forest-950) 100%
+  );
+  color: white;
+}
+
+@utility gradient-hero {
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-900) 0%,
+    var(--color-brand-800) 40%,
+    var(--color-accent-800) 100%
+  );
+}
+
+@utility overlay-dark {
+  background: linear-gradient(
+    to right,
+    rgb(2 44 34 / 0.92) 0%,
+    rgb(6 78 59 / 0.75) 50%,
+    rgb(6 78 59 / 0.4) 100%
+  );
+}
+
+@utility divider-brand {
+  height: 4px;
+  width: 4rem;
+  margin-inline: auto;
+  border-radius: var(--radius-badge);
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-500),
+    var(--color-accent-500)
+  );
+}
+
+@utility link-underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-brand-300);
+
+  &:hover {
+    text-decoration-color: var(--color-brand-600);
+    color: var(--color-brand-700);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Form utilities (chuẩn bị cho trang liên hệ sau)
+   -------------------------------------------------------------------------- */
+
+@utility input-field {
+  width: 100%;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-surface-200);
+  background-color: white;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-surface-dark);
+  transition: border-color 200ms, box-shadow 200ms;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-brand-500);
+    box-shadow: 0 0 0 3px rgb(16 185 129 / 0.15);
+  }
+}
+
+@utility label-field {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-gray-700, #374151);
+}
