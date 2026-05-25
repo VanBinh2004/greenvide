@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Đăng nhập - GreenTech')
+@section('title', 'Đăng ký - GreenTech')
 
 @section('content')
     <section class="section-padding">
@@ -9,16 +9,16 @@
                 <div class="rounded-[2rem] border border-surface-200 bg-white p-8 shadow-card">
                     <div class="flex items-center gap-4">
                         <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-100 text-brand-700">
-                            <i class="fas fa-user-lock text-2xl" aria-hidden="true"></i>
+                            <i class="fas fa-user-plus text-2xl" aria-hidden="true"></i>
                         </div>
                         <div>
-                            <p class="eyebrow">Tài khoản GreenTech</p>
-                            <h1 class="heading-2 mt-2">Đăng nhập để tiếp tục</h1>
+                            <p class="eyebrow">Tạo tài khoản</p>
+                            <h1 class="heading-2 mt-2">Đăng ký GreenTech</h1>
                         </div>
                     </div>
 
                     <p class="text-lead mt-6 max-w-2xl text-surface-muted">
-                        Nhập email và mật khẩu để truy cập quản lý đơn hàng, dữ liệu khách hàng và các chức năng nội bộ.
+                        Tạo tài khoản để truy cập quản lý đơn hàng, hỗ trợ khách hàng và nhận thông báo ưu đãi nhanh chóng.
                     </p>
 
                     @if ($errors->any())
@@ -28,8 +28,22 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('login.submit') }}" class="mt-8 space-y-6" novalidate>
+                    <form method="POST" action="{{ route('register.submit') }}" class="mt-8 space-y-6" novalidate>
                         @csrf
+
+                        <div>
+                            <label for="name" class="mb-2 block text-sm font-semibold text-surface-dark">Họ và tên</label>
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                value="{{ old('name') }}"
+                                required
+                                autofocus
+                                class="w-full rounded-3xl border border-surface-200 bg-surface-50 px-4 py-3 text-surface-dark placeholder:text-surface-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
+                                placeholder="Nguyễn Văn A"
+                            />
+                        </div>
 
                         <div>
                             <label for="email" class="mb-2 block text-sm font-semibold text-surface-dark">Email</label>
@@ -39,7 +53,6 @@
                                 type="email"
                                 value="{{ old('email') }}"
                                 required
-                                autofocus
                                 autocomplete="username"
                                 class="w-full rounded-3xl border border-surface-200 bg-surface-50 px-4 py-3 text-surface-dark placeholder:text-surface-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
                                 placeholder="email@domain.com"
@@ -53,56 +66,59 @@
                                 name="password"
                                 type="password"
                                 required
-                                autocomplete="current-password"
+                                autocomplete="new-password"
                                 class="w-full rounded-3xl border border-surface-200 bg-surface-50 px-4 py-3 text-surface-dark placeholder:text-surface-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
-                                placeholder="Nhập mật khẩu"
+                                placeholder="Tối thiểu 8 ký tự"
                             />
                         </div>
 
-                        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                            <label class="inline-flex items-center gap-3 text-sm text-surface-muted">
-                                <input type="checkbox" name="remember" class="h-4 w-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500" />
-                                Ghi nhớ đăng nhập
-                            </label>
-
-                            <a href="mailto:support@greenvide.local" class="text-sm font-semibold text-brand-600 hover:text-brand-700">
-                                Quên mật khẩu?
-                            </a>
+                        <div>
+                            <label for="password_confirmation" class="mb-2 block text-sm font-semibold text-surface-dark">Xác nhận mật khẩu</label>
+                            <input
+                                id="password_confirmation"
+                                name="password_confirmation"
+                                type="password"
+                                required
+                                autocomplete="new-password"
+                                class="w-full rounded-3xl border border-surface-200 bg-surface-50 px-4 py-3 text-surface-dark placeholder:text-surface-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
+                                placeholder="Nhập lại mật khẩu"
+                            />
                         </div>
 
                         <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-brand-600 px-5 py-3.5 text-base font-semibold text-white shadow-button transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
-                            Đăng nhập
+                            Đăng ký
                         </button>
 
                         <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-                            <a href="{{ route('register') }}" class="inline-flex w-full items-center justify-center rounded-full border border-brand-600 bg-white px-5 py-3.5 text-base font-semibold text-brand-600 transition hover:bg-brand-50 sm:flex-1">
-                                Đăng ký tài khoản
+                            <a href="{{ route('login') }}" class="inline-flex w-full items-center justify-center rounded-full border border-brand-600 bg-white px-5 py-3.5 text-base font-semibold text-brand-600 transition hover:bg-brand-50 sm:flex-1">
+                                Quay lại đăng nhập
                             </a>
                             <a href="mailto:support@greenvide.local" class="inline-flex w-full items-center justify-center rounded-full bg-surface-100 px-5 py-3.5 text-base font-semibold text-surface-dark transition hover:bg-surface-200 sm:flex-1">
                                 Hỗ trợ nếu cần
                             </a>
                         </div>
+                    </form>
                 </div>
 
                 <aside class="rounded-[2rem] bg-brand-50 p-8 shadow-card">
                     <div class="space-y-6 text-surface-dark">
                         <div>
-                            <p class="eyebrow">Lợi ích khi đăng nhập</p>
-                            <h2 class="heading-3 mt-2">Truy cập nhanh, an toàn, tiện lợi</h2>
+                            <p class="eyebrow">Lợi ích khi đăng ký</p>
+                            <h2 class="heading-3 mt-2">Tiện ích dành riêng cho bạn</h2>
                         </div>
 
                         <div class="space-y-4">
                             <div class="rounded-3xl border border-brand-100 bg-white p-4 shadow-sm">
-                                <p class="font-semibold">Quản lý đơn hàng</p>
-                                <p class="text-sm text-surface-muted mt-1">Theo dõi tình trạng và lịch sử đơn hàng ngay sau khi đăng nhập.</p>
+                                <p class="font-semibold">Truy cập nhanh</p>
+                                <p class="text-sm text-surface-muted mt-1">Quản lý thông tin và đơn hàng dễ dàng mọi lúc.</p>
                             </div>
                             <div class="rounded-3xl border border-brand-100 bg-white p-4 shadow-sm">
-                                <p class="font-semibold">Thông tin khách hàng</p>
-                                <p class="text-sm text-surface-muted mt-1">Xem dữ liệu và hỗ trợ nhu cầu của khách hàng dễ dàng hơn.</p>
+                                <p class="font-semibold">Theo dõi ưu đãi</p>
+                                <p class="text-sm text-surface-muted mt-1">Nhận thông tin khuyến mãi và cập nhật sản phẩm mới.</p>
                             </div>
                             <div class="rounded-3xl border border-brand-100 bg-white p-4 shadow-sm">
-                                <p class="font-semibold">Bảo mật cao</p>
-                                <p class="text-sm text-surface-muted mt-1">Bảo vệ thông tin tài khoản với đăng nhập an toàn.</p>
+                                <p class="font-semibold">Hỗ trợ khách hàng</p>
+                                <p class="text-sm text-surface-muted mt-1">Dễ dàng liên hệ và nhận trợ giúp nhanh chóng.</p>
                             </div>
                         </div>
                     </div>
