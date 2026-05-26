@@ -1,5 +1,5 @@
-<footer class="bg-gradient-to-b from-emerald-950 to-[#022c22] text-emerald-50" id="lien-he">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<footer class="site-footer w-full bg-gradient-to-b from-emerald-950 to-[#022c22] text-emerald-50">
+    <div class="container-site">
 
         {{-- Main footer grid --}}
         <div class="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:py-16">
@@ -37,8 +37,8 @@
                     <li><a href="{{ route('home') }}" class="text-sm text-emerald-100/80 transition hover:text-white">Trang chủ</a></li>
                     <li><a href="#gioi-thieu" class="text-sm text-emerald-100/80 transition hover:text-white">Giới thiệu</a></li>
                     <li><a href="#san-pham" class="text-sm text-emerald-100/80 transition hover:text-white">Sản phẩm</a></li>
-                    <li><a href="#tin-tuc" class="text-sm text-emerald-100/80 transition hover:text-white">Tin tức</a></li>
-                    <li><a href="#lien-he" class="text-sm text-emerald-100/80 transition hover:text-white">Liên hệ</a></li>
+                    <li><a href="{{ route('news.index') }}" class="text-sm text-emerald-100/80 transition hover:text-white">Tin tức</a></li>
+                    <li><a href="{{ route('home') }}#lien-he" class="text-sm text-emerald-100/80 transition hover:text-white">Liên hệ</a></li>
                 </ul>
             </div>
 

@@ -27,17 +27,13 @@
         ['step' => '04', 'icon' => 'fa-chart-line', 'title' => 'Đồng hành phát triển', 'desc' => 'Theo dõi sinh trưởng, tối ưu canh tác đến khi ổn định năng suất.'],
     ];
 
-    $newsPosts = [
-        ['title' => 'Kỹ thuật trồng Đàn Hương cho người mới bắt đầu', 'date' => '15/05/2026', 'category' => 'Kỹ thuật', 'excerpt' => 'Hướng dẫn chọn giống, chuẩn bị đất và chăm sóc 6 tháng đầu hiệu quả.', 'image' => 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=700&q=85'],
-        ['title' => 'Trầm Hương — Cơ hội đầu tư sinh lời dài hạn', 'date' => '08/05/2026', 'category' => 'Đầu tư', 'excerpt' => 'Phân tích thị trường, chi phí và lộ trình khai thác tối ưu.', 'image' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&q=85'],
-        ['title' => 'Măng Lục Trúc và xu hướng nông nghiệp xanh 2026', 'date' => '01/05/2026', 'category' => 'Xu hướng', 'excerpt' => 'Vì sao Măng tre được các hộ trồng rừng tin chọn.', 'image' => 'https://images.unsplash.com/photo-1574323347407-f5b472f6c281?w=700&q=85'],
-    ];
+    $newsPosts = \App\Support\NewsCatalog::latest(3);
 @endphp
 
 @section('content')
 
-    {{-- 2. Hero Section --}}
-    <section class="relative flex min-h-[min(100vh,900px)] items-center overflow-hidden">
+    {{-- Hero — full width --}}
+    <section class="relative flex w-full min-h-[min(92vh,880px)] items-center overflow-hidden">
         <img
             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=90"
             alt="Rừng xanh thiên nhiên"
@@ -104,10 +100,10 @@
         </a>
     </section>
 
-    {{-- 3. Thống kê (nổi trên nền trắng) --}}
-    <section id="thong-ke" class="relative z-20 -mt-16 pb-4 md:-mt-20">
+    {{-- Thống kê --}}
+    <section id="thong-ke" class="gt-reveal gt-reveal--delay-1 relative z-20 w-full -mt-14 pb-6 md:-mt-16">
         <div class="container-site">
-            <div class="rounded-3xl border border-brand-100 bg-white p-8 shadow-xl shadow-brand-900/5 md:p-10">
+            <div class="rounded-2xl border border-[#e2e8f0] bg-white p-8 md:p-10">
                 <div class="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-6">
                     @foreach ($stats as $stat)
                         <div class="group border-brand-100 text-center md:border-r md:last:border-r-0 md:px-4">
@@ -124,13 +120,13 @@
     </section>
 
     {{-- 4. Giới thiệu công ty --}}
-    <section id="gioi-thieu" class="section-padding section-bg-light pt-20 md:pt-24">
+    <section id="gioi-thieu" class="gt-reveal section-padding w-full section-bg-light pt-16 md:pt-20">
         <div class="container-site">
             <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
                 <div class="relative">
                     <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-brand-100">
                         <img
-                            src="https://images.unsplash.com/photo-1464226184884-fa280b87d399?w=900&q=90"
+                            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900&q=90&auto=format&fit=crop"
                             alt="GreenTech — Nông nghiệp xanh"
                             class="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-105"
                             loading="lazy"
@@ -184,8 +180,8 @@
         </div>
     </section>
 
-    {{-- 5. Sản phẩm nổi bật --}}
-    <section id="san-pham" class="section-padding relative overflow-hidden bg-white">
+    {{-- Sản phẩm nổi bật --}}
+    <section id="san-pham" class="gt-reveal section-padding relative w-full overflow-hidden section-bg-white">
         <div class="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-brand-100/60 blur-3xl"></div>
         <div class="pointer-events-none absolute -left-32 bottom-20 h-80 w-80 rounded-full bg-accent-100/50 blur-3xl"></div>
 
@@ -215,7 +211,7 @@
     </section>
 
     {{-- 6. Lý do chọn GreenTech --}}
-    <section class="section-padding bg-gradient-to-b from-brand-50 to-white">
+    <section class="gt-reveal section-padding w-full bg-gradient-to-b from-brand-50 to-white">
         <div class="container-site">
             <div class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Tại sao chọn chúng tôi</p>
@@ -226,7 +222,7 @@
 
             <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 @foreach ($features as $feature)
-                    <div class="group rounded-2xl border border-white bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl">
+                    <div class="group card p-6 text-center transition duration-300 hover:border-brand-200">
                         <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 transition duration-300 group-hover:bg-gradient-to-br group-hover:from-brand-500 group-hover:to-accent-600 group-hover:text-white group-hover:shadow-lg">
                             <i class="fas {{ $feature['icon'] }} text-2xl" aria-hidden="true"></i>
                         </div>
@@ -238,8 +234,8 @@
         </div>
     </section>
 
-    {{-- 7. Quy trình hợp tác --}}
-    <section id="quy-trinh" class="section-padding section-bg-white">
+    {{-- Quy trình --}}
+    <section id="quy-trinh" class="gt-reveal section-padding w-full section-bg-white">
         <div class="container-site">
             <div class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Hợp tác</p>
@@ -286,7 +282,7 @@
     </section>
 
     {{-- 8. Tin tức mới --}}
-    <section id="tin-tuc" class="section-padding section-bg-light">
+    <section id="tin-tuc" class="gt-reveal section-padding w-full section-bg-light">
         <div class="container-site">
             <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div class="max-w-xl">
@@ -294,7 +290,7 @@
                     <h2 class="heading-2 mt-3">Tin Tức & Kiến Thức Mới</h2>
                     <p class="text-lead mt-4">Cập nhật kỹ thuật canh tác, xu hướng thị trường và kinh nghiệm thực tế.</p>
                 </div>
-                <a href="#" class="btn btn-secondary shrink-0 self-start">
+                <a href="{{ route('news.index') }}" class="btn btn-secondary shrink-0 self-start">
                     Xem tất cả
                     <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
                 </a>
@@ -302,34 +298,14 @@
 
             <div class="mt-12 grid gap-8 md:grid-cols-3">
                 @foreach ($newsPosts as $post)
-                    <article class="group card-hover flex flex-col overflow-hidden bg-white">
-                        <a href="#" class="relative block overflow-hidden">
-                            <img
-                                src="{{ $post['image'] }}"
-                                alt="{{ $post['title'] }}"
-                                class="h-56 w-full object-cover transition duration-500 group-hover:scale-110"
-                                loading="lazy"
-                            >
-                            <span class="badge-accent absolute left-4 top-4">{{ $post['category'] }}</span>
-                        </a>
-                        <div class="card-body flex flex-1 flex-col">
-                            <time class="text-xs font-bold uppercase tracking-wide text-brand-600">{{ $post['date'] }}</time>
-                            <h3 class="mt-3 text-lg font-bold leading-snug text-gray-900 transition group-hover:text-brand-700 line-clamp-2">
-                                <a href="#">{{ $post['title'] }}</a>
-                            </h3>
-                            <p class="mt-3 flex-1 text-sm leading-relaxed text-surface-muted line-clamp-3">{{ $post['excerpt'] }}</p>
-                            <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-600 transition hover:gap-3">
-                                Đọc thêm <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </article>
+                    @include('partials.news-card', ['article' => $post])
                 @endforeach
             </div>
         </div>
     </section>
 
-    {{-- 9. CTA cuối trang --}}
-    <section class="relative overflow-hidden">
+    {{-- CTA band --}}
+    <section class="gt-reveal relative w-full overflow-hidden">
         <img
             src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=85"
             alt=""
@@ -337,45 +313,25 @@
             loading="lazy"
             aria-hidden="true"
         >
-        <div class="absolute inset-0 bg-brand-950/92"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-900/80 to-transparent"></div>
-
-        <div class="container-site relative z-10 py-20 text-center md:py-28">
-            <div class="mx-auto max-w-3xl">
-                <p class="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Liên hệ ngay</p>
-                <h2 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
-                    Bắt đầu dự án trồng cây của bạn hôm nay
-                </h2>
-                <p class="mx-auto mt-6 max-w-2xl text-lg text-emerald-100/90">
-                    Đăng ký tư vấn miễn phí — chuyên gia GreenTech sẽ liên hệ trong vòng 24 giờ.
-                </p>
-
-                <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <a href="tel:0908544200" class="btn btn-primary btn-lg w-full justify-center sm:w-auto hover:scale-[1.02]">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        Hotline: 0908 544 200
-                    </a>
-                    <a href="#lien-he" class="btn btn-outline btn-lg w-full justify-center sm:w-auto hover:scale-[1.02]">
-                        Gửi yêu cầu tư vấn
-                    </a>
-                </div>
-
-                <div class="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
-                    @foreach ([
-                        ['icon' => 'fa-clock', 'text' => 'Phản hồi 24h'],
-                        ['icon' => 'fa-comments', 'text' => 'Tư vấn miễn phí'],
-                        ['icon' => 'fa-map-location-dot', 'text' => 'Toàn quốc'],
-                    ] as $item)
-                        <div class="rounded-xl border border-white/15 bg-white/5 px-4 py-3 backdrop-blur-sm">
-                            <i class="fas {{ $item['icon'] }} text-emerald-400" aria-hidden="true"></i>
-                            <p class="mt-2 text-sm font-semibold text-white">{{ $item['text'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
+        <div class="absolute inset-0 bg-[#022c22]/88"></div>
+        <div class="container-site relative z-10 py-16 text-center md:py-20">
+            <p class="eyebrow !text-emerald-300">Bắt đầu ngay</p>
+            <h2 class="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+                Đầu tư tương lai xanh cùng GreenTech
+            </h2>
+            <p class="mx-auto mt-4 max-w-xl text-base text-emerald-100/90 md:text-lg">
+                Tư vấn miễn phí — phản hồi trong 24 giờ làm việc.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <a href="#lien-he" class="btn btn-primary btn-lg">Điền form tư vấn</a>
+                <a href="tel:0908544200" class="btn btn-outline btn-lg">
+                    <i class="fas fa-phone" aria-hidden="true"></i> 0908 544 200
+                </a>
             </div>
         </div>
     </section>
 
-    {{-- 10. Footer: @include trong layouts/app --}}
+    @include('partials.lead-form')
+
 
 @endsection

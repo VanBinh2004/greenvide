@@ -7,8 +7,8 @@
 
 @theme {
   /* Typography */
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   /* Brand — Emerald */
   --color-brand-50: #ecfdf5;
@@ -545,4 +545,337 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-gray-700, #374151);
+}
+
+/* ==========================================================================
+   GreenTech UX v2 — Layout, skeleton, scroll reveal, toast, modal
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.page-root {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.page-root--visible {
+  opacity: 1;
+}
+
+/* Skeleton loading */
+.gt-skeleton {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.gt-skeleton--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gt-skeleton__bar {
+  height: 72px;
+  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(90deg, #f1f5f9 0%, #fff 50%, #f1f5f9 100%);
+  background-size: 200% 100%;
+  animation: gt-shimmer 1.2s ease-in-out infinite;
+}
+
+.gt-skeleton__hero {
+  height: min(50vh, 420px);
+  background: linear-gradient(180deg, #d1fae5 0%, #ecfdf5 40%, #f8fafc 100%);
+  animation: gt-pulse 1.4s ease-in-out infinite;
+}
+
+.gt-skeleton__content {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.gt-skeleton__line {
+  height: 14px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  max-width: 100%;
+  background: #e2e8f0;
+  animation: gt-shimmer 1.2s ease-in-out infinite;
+}
+
+.gt-skeleton__line--lg {
+  height: 28px;
+  max-width: 60%;
+  margin-bottom: 20px;
+}
+
+.gt-skeleton__line--short {
+  max-width: 40%;
+}
+
+.gt-skeleton__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gt-skeleton__card {
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: #e2e8f0;
+  animation: gt-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes gt-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes gt-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Scroll reveal */
+.gt-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gt-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gt-reveal--delay-1 { transition-delay: 0.08s; }
+.gt-reveal--delay-2 { transition-delay: 0.16s; }
+.gt-reveal--delay-3 { transition-delay: 0.24s; }
+
+/* Toast */
+.gt-toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: min(calc(100vw - 2rem), 22rem);
+  pointer-events: none;
+}
+
+@media (width >= 640px) {
+  .gt-toast-container {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+.gt-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.125rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 8px 30px rgb(15 23 42 / 0.08);
+  pointer-events: auto;
+  animation: gt-toast-in 0.35s ease;
+}
+
+.gt-toast--leaving {
+  animation: gt-toast-out 0.3s ease forwards;
+}
+
+.gt-toast__icon {
+  flex-shrink: 0;
+  font-size: 1.125rem;
+  margin-top: 0.1rem;
+}
+
+.gt-toast__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.gt-toast__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.gt-toast__message {
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.gt-toast__close {
+  flex-shrink: 0;
+  padding: 0.125rem;
+  border: none;
+  background: none;
+  color: #94a3b8;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.gt-toast__close:hover {
+  color: #1f2937;
+  background: #f8fafc;
+}
+
+.gt-toast--success {
+  border-left: 3px solid #10b981;
+}
+.gt-toast--success .gt-toast__icon { color: #059669; }
+
+.gt-toast--error {
+  border-left: 3px solid #dc2626;
+}
+.gt-toast--error .gt-toast__icon { color: #dc2626; }
+
+.gt-toast--info {
+  border-left: 3px solid #14b8a6;
+}
+.gt-toast--info .gt-toast__icon { color: #0d9488; }
+
+@keyframes gt-toast-in {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes gt-toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(100%); }
+}
+
+/* Modal */
+.gt-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.gt-modal-root.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.gt-modal-open {
+  overflow: hidden;
+}
+
+.gt-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(15 23 42 / 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.gt-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  max-height: min(90vh, 36rem);
+  overflow: auto;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 1.5rem;
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.25s ease;
+}
+
+.gt-modal-root.is-open .gt-modal-panel {
+  transform: scale(1) translateY(0);
+}
+
+.gt-modal-panel--lg {
+  max-width: 36rem;
+}
+
+.gt-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gt-modal__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+.gt-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.gt-modal__close:hover {
+  color: #1f2937;
+  border-color: #cbd5e1;
+}
+
+.gt-modal__body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.gt-modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.gt-modal__footer.hidden {
+  display: none;
+}
+
+/* Softer cards site-wide */
+.card-hover:hover {
+  transform: none;
+  box-shadow: none;
 }

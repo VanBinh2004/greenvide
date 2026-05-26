@@ -66,7 +66,7 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
+        return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng thành công.');
     }
 
     /**
