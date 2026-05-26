@@ -15,11 +15,4 @@ document.addEventListener('DOMContentLoaded', () => {
             toggle.setAttribute('aria-label', isOpen ? 'Mở menu' : 'Đóng menu');
         });
     }
-
-    document.querySelectorAll('[data-add-to-cart]').forEach((button) => {
-        button.addEventListener('click', () => {
-            const name = button.dataset.productName ?? 'sản phẩm';
-            window.alert(`Đã thêm "${name}" vào giỏ hàng (demo). Tính năng giỏ hàng sẽ được triển khai sau.`);
-        });
-    });
 });

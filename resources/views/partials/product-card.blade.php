@@ -29,16 +29,15 @@
             <a href="{{ route('product.detail', $product['slug']) }}" class="btn btn-secondary btn-sm flex-1 justify-center">
                 Xem chi tiết
             </a>
-            <button
-                type="button"
-                class="btn btn-primary btn-sm flex-1 justify-center"
-                data-add-to-cart
-                data-product-name="{{ $product['name'] }}"
-                title="Giỏ hàng sẽ được bổ sung sau"
-            >
-                <i class="fas fa-cart-plus text-xs" aria-hidden="true"></i>
-                Thêm vào giỏ
-            </button>
+            <form action="{{ route('cart.add') }}" method="POST" class="flex-1">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product['slug'] }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn btn-primary btn-sm w-full justify-center">
+                    <i class="fas fa-cart-plus text-xs" aria-hidden="true"></i>
+                    Thêm vào giỏ
+                </button>
+            </form>
         </div>
     </div>
 </article>

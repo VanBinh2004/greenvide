@@ -61,15 +61,15 @@
                     <p class="text-lead mt-6">{{ $product['short_desc'] }}</p>
 
                     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                        <button
-                            type="button"
-                            class="btn btn-primary btn-lg flex-1 justify-center"
-                            data-add-to-cart
-                            data-product-name="{{ $product['name'] }}"
-                        >
-                            <i class="fas fa-cart-plus" aria-hidden="true"></i>
-                            Thêm vào giỏ hàng
-                        </button>
+                        <form action="{{ route('cart.add') }}" method="POST" class="flex-1">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product['slug'] }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary btn-lg w-full justify-center">
+                                <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                                Thêm vào giỏ hàng
+                            </button>
+                        </form>
                         <a href="tel:0908544200" class="btn btn-secondary btn-lg flex-1 justify-center">
                             <i class="fas fa-phone" aria-hidden="true"></i>
                             Tư vấn ngay

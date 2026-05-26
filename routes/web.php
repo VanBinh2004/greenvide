@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,3 +57,27 @@ Route::post('/register', function (Request $request) {
 
     return redirect()->route('home');
 })->name('register.submit');
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('home');
+})->name('logout');
+
+// Profile routes (protected by auth)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'dashboard'])->name('profile.dashboard');
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+});
+
+// Cart routes
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::put('/cart/{productId}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+
